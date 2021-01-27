@@ -1,0 +1,7 @@
+<h2>Products</h2>
+<ul class="products"> 
+    <li *ngFor="let product of products"> 
+        <button class="badge" (click)="onSelect(product)" >{{product.name}}</button>
+    </li>
+</ul>
+<app-product-details [product]="selectedProduct"></app-product-details>
