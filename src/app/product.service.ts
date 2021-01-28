@@ -14,8 +14,6 @@ export class ProductService {
 
   private productsUrl = '/api/products/';
 
-  products! : Product[];
-
   constructor(private http: HttpClient) { }
 
   getProducts() : Observable<Product[]> {
@@ -23,7 +21,13 @@ export class ProductService {
       //.pipe(catchError(this.handleError<Product[]>('getProducts', [])));
   }
 
-  deleteProduct(product : Product) {
+  addProduct(product : Product) : Observable<Product> {
+    return this.http.post<Product>(this.productsUrl, product)
+      .pipe(tap((newProduct: Product) => console.log(`Product added: id=${newProduct.id}`)),
+        catchError(this.handleError<Product>("Add product error")));
+  }
+
+  deleteProduct(product : Product) : Observable<Product> {
     return this.http.delete<Product>(`${this.productsUrl}/${product.id}`)
       .pipe(catchError(this.handleError<Product>("delete error")));
   }

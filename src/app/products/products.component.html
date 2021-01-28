@@ -1,4 +1,12 @@
-<h2>Products</h2>
+<h2>Products </h2>
+<div>
+    <label>Name: <input #productName /> </label>
+    <label>Cost: <input #productCost /> </label>
+    <label>Stock: <input #productStock /> </label>
+    <button (click)="addProduct(productName.value, productCost.value, productStock.value);
+                     productName.value = ''; productCost.value=''; productStock.value='';">
+                     Add</button>
+</div>
 <ul class="products"> 
     <li *ngFor="let product of products"> 
         <button class="badge" (click)="onSelect(product)" >{{product.name}}</button>

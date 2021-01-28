@@ -1,3 +1,4 @@
+import { NONE_TYPE } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { Product } from "../product";
 import { ProductService } from "../product.service";
@@ -22,7 +23,15 @@ export class ProductsComponent implements OnInit {
     this.selectedProduct = product;
   }
 
+  addProduct(name : String, cost : String, stock : String) : void {
+   name = name.trim();
+   if (!name || !cost || !stock) return;
+   var new_product:Product = {name: name, cost: Number(cost), stock: Number(stock)} as Product;
+   this.productService.addProduct(new_product).subscribe(p => this.products.push(p));
+  }
+
   deleteThis(product : Product) : void {
+    this.selectedProduct = {} as Product;
     this.products = this.products.filter(p => p !== product);
     this.productService.deleteProduct(product).subscribe();
   }
