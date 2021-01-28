@@ -22,6 +22,11 @@ export class ProductsComponent implements OnInit {
     this.selectedProduct = product;
   }
 
+  deleteThis(product : Product) : void {
+    this.products = this.products.filter(p => p !== product);
+    this.productService.deleteProduct(product).subscribe();
+  }
+
   getProducts() : void {
     this.productService.getProducts().subscribe(products => this.products = products);
   }

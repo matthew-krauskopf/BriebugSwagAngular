@@ -23,6 +23,11 @@ export class ProductService {
       //.pipe(catchError(this.handleError<Product[]>('getProducts', [])));
   }
 
+  deleteProduct(product : Product) {
+    return this.http.delete<Product>(`${this.productsUrl}/${product.id}`)
+      .pipe(catchError(this.handleError<Product>("delete error")));
+  }
+
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
   
