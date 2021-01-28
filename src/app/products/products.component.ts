@@ -11,7 +11,7 @@ import { ProductService } from "../product.service";
 export class ProductsComponent implements OnInit {
 
   products! : Product[];
-  selectedProduct! : Product;
+  selectedProduct : Product = {} as Product;
 
   constructor(private productService : ProductService) { }
 

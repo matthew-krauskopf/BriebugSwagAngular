@@ -1,5 +1,20 @@
-<div *ngIf="product"> 
-    <div>Name: {{product.name}}</div>
-    <div>Cost: {{product.cost}}</div>
-    <div>Stock: {{product.stock}}</div>
+<div *ngIf="product.name"> 
+    <div>
+        <label>Name: {{product.name}}
+            <input #newName placeholder="{{product.name}}"/>
+        </label>
+    </div>
+    <div>
+        <label>Cost: {{product.cost}}
+            <input #newCost placeholder="{{product.cost}}"/>
+        </label>
+    </div>
+    <div>
+        <label>Stock: {{product.stock}}
+            <input #newStock placeholder="{{product.stock}}"/>
+        </label>
+    </div>
+    <button (click)="update(newName.value, newCost.value, newStock.value);
+                    newStock.value=''; newName.value=''; newCost.value='';"
+                    >Update</button>
 </div>

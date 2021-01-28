@@ -14,6 +14,10 @@ export class ProductService {
 
   private productsUrl = '/api/products/';
 
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json'})
+  }
+
   constructor(private http: HttpClient) { }
 
   getProducts() : Observable<Product[]> {
@@ -30,6 +34,11 @@ export class ProductService {
   deleteProduct(product : Product) : Observable<Product> {
     return this.http.delete<Product>(`${this.productsUrl}/${product.id}`)
       .pipe(catchError(this.handleError<Product>("delete error")));
+  }
+
+  updateProduct(product : Product) : Observable<any> {
+    return this.http.put<any>(`${this.productsUrl}/${product.id}`, product, this.httpOptions)
+            .pipe(catchError(this.handleError<any>("update error")));
   }
 
   private handleError<T>(operation = 'operation', result?: T) {
